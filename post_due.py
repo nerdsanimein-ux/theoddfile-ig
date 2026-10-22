@@ -20,6 +20,7 @@ def call(method, path, **params):
         raise SystemExit(f"Instagram {e.code}: {e.read().decode()}")
 
 
+print("account:", call("GET", UID, fields="username")["username"])  # fails the run (GitHub emails you) if the token expired
 queue = json.load(open("queue.json", encoding="utf-8"))
 now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 due = sorted((i for i in queue if not i.get("posted") and i["publish_at"] <= now), key=lambda i: i["publish_at"])
