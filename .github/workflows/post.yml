@@ -1,8 +1,9 @@
 name: Post due reels to Instagram
 on:
   schedule:
-    - cron: "35 7 * * *"   # 13:05 IST
-    - cron: "35 13 * * *"  # 19:05 IST
+    # GitHub often runs scheduled jobs hours late (a 07:35 run started at 12:47), so check every 30 min:
+    # each run posts only what is due, so a late or skipped run is covered by the next one.
+    - cron: "5,35 * * * *"
   workflow_dispatch:
 permissions:
   contents: write
